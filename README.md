@@ -2,7 +2,7 @@
 
 
 
-# [Project Name] 🎯
+# [Pointless AI] 🎯
 
 
 ## Basic Details
