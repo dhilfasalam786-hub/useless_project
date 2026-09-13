@@ -6,11 +6,11 @@
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: [Nexora]
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
+- Team Lead: [] - [College]
 - Member 2: [Name] - [College]
 - Member 3: [Name] - [College]
 
