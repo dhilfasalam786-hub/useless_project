@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pointless — The Overcomplicated Decision Engine</title>
+  <meta name="description" content="Generate completely unnecessary, overcomplicated, and hilarious decisions for your mundane everyday situations. 100% scientifically questionable.">
+  <meta name="theme-color" content="#6366f1">
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Canvas for lightweight celebratory confetti particles -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="app-wrapper">
+    <!-- Header / Navbar -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <span>🌀</span>
+        </div>
+        <div>
+          <h1 class="brand-title">POINTLESS</h1>
+          <p class="brand-subtitle">Overthinking life's simplest choices so you don't have to</p>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <button id="sound-toggle" class="icon-btn" title="Toggle Sound FX" aria-label="Toggle Sound FX">
+          <span class="btn-icon">🔊</span>
+        </button>
+        <button id="theme-toggle" class="icon-btn" title="Toggle Light/Dark Theme" aria-label="Toggle Theme">
+          <span class="btn-icon">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Category Filter Bar -->
+    <nav class="categories-nav" aria-label="Dilemma categories">
+      <span class="categories-label">Filter Vibe:</span>
+      <div class="categories-chips" id="categories-container">
+        <button class="chip active" data-category="all">✨ All Chaos</button>
+        <button class="chip" data-category="work">💼 Work & Study</button>
+        <button class="chip" data-category="food">🍕 Food & Snacks</button>
+        <button class="chip" data-category="social">💬 Social & Texts</button>
+        <button class="chip" data-category="chores">🧦 Chores & Routine</button>
+        <button class="chip" data-category="existential">🌌 Existential Dread</button>
+      </div>
+    </nav>
+
+    <!-- Main Generator Card -->
+    <main class="main-content">
+      <section class="card decision-card" id="decision-card">
+        <!-- Card Header Info -->
+        <div class="card-meta">
+          <span class="badge" id="category-badge">🧦 Chores & Routine</span>
+          <span class="decision-id" id="decision-counter">Decision #1,337</span>
+        </div>
+
+        <!-- Dilemma Question -->
+        <div class="dilemma-block">
+          <span class="eyebrow">THE MUNDANE DILEMMA</span>
+          <h2 class="dilemma-text" id="dilemma-text">
+            "Should I fold my clean laundry right now?"
+          </h2>
+        </div>
+
+        <!-- The Ridiculous Answer -->
+        <div class="verdict-block">
+          <div class="verdict-header">
+            <span class="verdict-label">✨ UNNECESSARY VERDICT</span>
+            <span class="status-indicator">Approved by chaos</span>
+          </div>
+          <p class="verdict-text" id="verdict-text">
+            Form the pile into a sacred decorative hill on your chair. Introduce it to guests as modern fiber art.
+          </p>
+        </div>
+
+        <!-- The Funny Reason -->
+        <div class="rationale-block">
+          <div class="rationale-header">
+            <span class="rationale-icon">🔬</span>
+            <span class="rationale-label">WHY THIS IS OBJECTIVELY SOUND:</span>
+          </div>
+          <p class="rationale-text" id="rationale-text">
+            Folding introduces artificial structural tension into the cotton fibers, damaging their spiritual integrity.
+          </p>
+        </div>
+
+        <!-- Confidence Gauge -->
+        <div class="confidence-block">
+          <div class="confidence-header">
+            <span class="confidence-title">
+              <strong>Algorithm Confidence:</strong>
+              <span id="confidence-percentage">98.4%</span>
+            </span>
+            <span class="confidence-subtext" id="confidence-subtext">Margin of error: ±140%</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="98">
+            <div class="progress-bar" id="confidence-bar" style="width: 98%;"></div>
+          </div>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="card-actions">
+          <button id="generate-btn" class="btn btn-primary btn-prominent" aria-label="Give Me a Pointless Decision">
+            <span class="btn-icon dice-icon">🎲</span>
+            <span class="btn-text">Give Me a Pointless Decision</span>
+            <span class="btn-sparkle">✨</span>
+          </button>
+
+          <button id="worse-btn" class="btn btn-secondary" title="Get an even worse, more unhinged alternative">
+            <span class="btn-icon">⚡</span>
+            <span>Make It Worse</span>
+          </button>
+
+          <button id="copy-btn" class="btn btn-outline" title="Copy this decision to clipboard">
+            <span class="btn-icon">📋</span>
+            <span>Copy</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Interactive Custom Dilemma Box -->
+      <section class="card custom-dilemma-card">
+        <div class="custom-card-header">
+          <div class="custom-title-row">
+            <span class="custom-icon">🔮</span>
+            <h3>Have A Specific Dilemma?</h3>
+          </div>
+          <p>Type your real dilemma below, and Pointless will formulate a completely unhelpful solution.</p>
+        </div>
+
+        <form id="custom-dilemma-form" class="custom-form">
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              id="custom-input" 
+              placeholder="e.g., Should I answer this phone call from an unknown number?" 
+              maxlength="150"
+              required
+            >
+            <button type="submit" class="btn btn-accent" id="custom-submit-btn">
+              <span>Overcomplicate It</span>
+              <span class="arrow-icon">→</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Hall of Pointless Decisions (History) -->
+      <section class="card history-card" id="history-section">
+        <div class="history-header">
+          <div class="history-title-row">
+            <span class="history-icon">📜</span>
+            <h3>Hall of Unnecessary Decisions</h3>
+            <span class="history-counter" id="history-badge">0 saved</span>
+          </div>
+          <div class="history-controls">
+            <button id="clear-history-btn" class="text-btn">Clear History</button>
+          </div>
+        </div>
+
+        <div class="history-list" id="history-list">
+          <div class="history-empty">
+            <p>No past decisions logged yet. Start clicking the dice above to accumulate questionable wisdom!</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Built with pure HTML, CSS & JavaScript • Zero external APIs • 100% questionable utility</p>
+      <p class="disclaimer">
+        ⚠️ <strong>Disclaimer:</strong> Pointless is not responsible for ruined laundry piles, lost friendships, or awkward stares in grocery stores.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast" role="alert" aria-live="polite">
+    <span class="toast-icon">✨</span>
+    <span class="toast-message" id="toast-message">Verdict copied to clipboard!</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
